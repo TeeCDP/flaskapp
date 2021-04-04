@@ -1,5 +1,5 @@
 mysql_host: 'mysqldb.c2czkfmbkxuy.us-east-1.rds.amazonaws.com'
 mysql_user: 'admin'
 # Enter your password in field below
-mysql_password: 'Harperway76'
+mysql_password: '********'
 mysql_db: 'flaskapp'
