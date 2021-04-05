@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 import yaml
+import time
+import datetime
 
 app = Flask(__name__)
 
@@ -12,6 +14,8 @@ app.config['MYSQL_PASSWORD'] = "Harperway76"
 app.config['MYSQL_DB'] = "flaskapp"
 
 mysql = MySQL(app)
+ts = time.time()
+timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -21,7 +25,7 @@ def index():
         name = userDetails['name']
         email = userDetails['email']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name, email))
+        cur.execute("INSERT INTO users(name, email, time_value) VALUES(%s, %s, %s)",(name, email,timestamp))
         mysql.connection.commit()
         cur.close()
         return redirect('/users')
